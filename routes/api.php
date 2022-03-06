@@ -16,9 +16,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Public Routes
-Route::get("/products", [ProductController::class, "index"]);
-Route::get("/products/{id}", [ProductController::class, "show"]);
-Route::get("/products/search/{name}", [ProductController::class, "search"]);
 
 Route::post("/register", [AuthController::class, "register"]);
 Route::post("/login", [AuthController::class, "login"]);
@@ -26,7 +23,10 @@ Route::post("/logout", [AuthController::class, "logout"]);
 
 // Protected Routes
 Route::group(["middleware" => ["auth:sanctum"]], function () {
+  Route::get("/products", [ProductController::class, "index"]);
+  Route::get("/products/{id}", [ProductController::class, "show"]);
+  Route::get("/products/search/{name}", [ProductController::class, "search"]);
   Route::post("/products", [ProductController::class, "store"]);
   Route::put("/products/{id}", [ProductController::class, "update"]);
-  Route::get("/products/{id}", [ProductController::class, "destroy"]);
+  Route::delete("/products/{id}", [ProductController::class, "destroy"]);
 });
