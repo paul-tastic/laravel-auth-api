@@ -71,4 +71,15 @@ class ProductController extends Controller
   {
     return Product::destroy($id);
   }
+
+  /**
+   * Search for a specified resource from storage using name.
+   *
+   * @param  str  $name
+   * @return \Illuminate\Http\Response
+   */
+  public function search($name)
+  {
+    return Product::where("name", "like", "%" . $name . "%")->get();
+  }
 }
